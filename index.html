@@ -2,3823 +2,621 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#111111">
-<title>Velora Digital | Misbah Group Requirement Form</title>
-
-<!-- PDF LIBRARY - primary + fallback -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111">
+<title>Velora Digital | Misbah Requirements</title>
 <style>
-:root{
-  --black:#111;
-  --dark:#181818;
-  --burgundy:#8f1830;
-  --burgundy2:#a92340;
-  --white:#fff;
-  --cream:#f5f5f1;
-  --line:#deded7;
-  --text:#202020;
-  --muted:#737373;
-  --green:#16794b;
-  --red:#bd2525;
-  --shadow:0 18px 55px rgba(0,0,0,.08);
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-html{scroll-behavior:smooth}
-
-body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:var(--cream);
-  color:var(--text);
-  line-height:1.55;
-}
-
-button,input,textarea,select{font:inherit}
-
-button{cursor:pointer}
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:999;
-  background:#111;
-  color:#fff;
-  box-shadow:0 4px 20px rgba(0,0,0,.18);
-}
-
-.header-inner{
-  max-width:1120px;
-  margin:auto;
-  padding:18px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.brand-icon{
-  width:42px;
-  height:42px;
-  border:1px solid #777;
-  border-radius:12px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:900;
-  font-size:18px;
-}
-
-.brand-name{
-  font-size:15px;
-  font-weight:800;
-  letter-spacing:1.7px;
-}
-
-.brand-sub{
-  font-size:9px;
-  color:#aaa;
-  letter-spacing:2px;
-  margin-top:2px;
-}
-
-.private-badge{
-  border:1px solid #444;
-  color:#ccc;
-  border-radius:30px;
-  padding:7px 12px;
-  font-size:10px;
-  letter-spacing:.7px;
-}
-
-.hero{
-  max-width:1120px;
-  margin:32px auto 20px;
-  padding:0 18px;
-}
-
-.hero-card{
-  background:linear-gradient(135deg,#121212,#292929);
-  color:white;
-  border-radius:25px;
-  padding:45px 38px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-
-.hero-card:after{
-  content:"";
-  position:absolute;
-  right:-120px;
-  top:-140px;
-  width:370px;
-  height:370px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:50%;
-}
-
-.hero-kicker{
-  color:#aaa;
-  font-size:10px;
-  letter-spacing:2px;
-  font-weight:700;
-}
-
-.hero h1{
-  font-size:clamp(30px,5vw,54px);
-  line-height:1.04;
-  max-width:800px;
-  margin:12px 0 16px;
-}
-
-.hero p{
-  max-width:800px;
-  color:#ccc;
-  font-size:14px;
-}
-
-.hero-notice{
-  margin-top:22px;
-  padding:14px 16px;
-  background:rgba(255,255,255,.07);
-  border-left:3px solid #fff;
-  border-radius:9px;
-  color:#ddd;
-  font-size:12px;
-}
-
-.progress-wrap{
-  max-width:1120px;
-  margin:18px auto;
-  padding:0 18px;
-}
-
-.progress-info{
-  display:flex;
-  justify-content:space-between;
-  font-size:11px;
-  color:#777;
-  margin-bottom:7px;
-}
-
-.progress{
-  height:7px;
-  background:#ddd;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progress-bar{
-  width:6%;
-  height:100%;
-  background:var(--burgundy);
-  transition:.25s;
-}
-
-.container{
-  max-width:1120px;
-  margin:0 auto 60px;
-  padding:0 18px;
-}
-
-.card{
-  background:white;
-  border:1px solid #e4e4dd;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:var(--shadow);
-}
-
-.section{
-  display:none;
-  animation:sectionIn .25s ease;
-}
-
-.section.active{display:block}
-
-@keyframes sectionIn{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.kicker{
-  color:var(--burgundy);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.section h2{
-  font-size:30px;
-  line-height:1.15;
-  margin:7px 0 8px;
-}
-
-.section-desc{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:28px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
-}
-
-.full{grid-column:1/-1}
-
-.field{margin-bottom:2px}
-
-label{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:7px;
-}
-
-.req{color:var(--burgundy)}
-
-input[type=text],
-input[type=email],
-input[type=tel],
-input[type=date],
-input[type=url],
-select,
-textarea{
-  width:100%;
-  border:1px solid #d8d8d2;
-  background:#fff;
-  border-radius:11px;
-  padding:12px 13px;
-  outline:none;
-  color:#222;
-  transition:.2s;
-}
-
-textarea{
-  min-height:105px;
-  resize:vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--burgundy);
-  box-shadow:0 0 0 3px rgba(143,24,48,.08);
-}
-
-.invalid{
-  border-color:var(--red)!important;
-  box-shadow:0 0 0 3px rgba(189,37,37,.08)!important;
-}
-
-.help{
-  display:block;
-  margin-top:5px;
-  font-size:10px;
-  color:#999;
-}
-
-.choice-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-
-.choice{
-  border:1px solid #deded8;
-  border-radius:14px;
-  padding:16px;
-  background:#fff;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.choice:hover{
-  border-color:#aaa;
-  transform:translateY(-1px);
-}
-
-.choice input{
-  margin-right:8px;
-}
-
-.choice strong{
-  font-size:13px;
-}
-
-.choice small{
-  display:block;
-  color:#888;
-  margin:6px 0 0 22px;
-  font-size:10px;
-}
-
-.sub-card{
-  margin-top:25px;
-  padding:22px;
-  background:#fafaf7;
-  border:1px solid #e5e5df;
-  border-radius:15px;
-}
-
-.sub-card h3{
-  font-size:17px;
-  margin-bottom:5px;
-}
-
-.sub-card p{
-  color:#777;
-  font-size:12px;
-  margin-bottom:18px;
-}
-
-.conditional{display:none}
-.conditional.show{display:block}
-
-.radio-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-}
-
-.radio{
-  border:1px solid #ddd;
-  border-radius:30px;
-  padding:9px 13px;
-  background:#fff;
-  font-size:12px;
-  cursor:pointer;
-}
-
-.radio input{margin-right:5px}
-
-.file-box{
-  border:1px dashed #bbb;
-  background:#fafaf8;
-  padding:18px;
-  border-radius:12px;
-}
-
-.file-list{
-  color:#777;
-  font-size:10px;
-  margin-top:9px;
-  line-height:1.7;
-}
-
-.info-box{
-  margin-top:18px;
-  padding:16px;
-  background:#f7f7f3;
-  border:1px solid #e1e1da;
-  border-radius:13px;
-  color:#666;
-  font-size:12px;
-}
-
-.nav{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  border-top:1px solid #eee;
-  margin-top:32px;
-  padding-top:20px;
-}
-
-.nav-right{
-  display:flex;
-  gap:9px;
-}
-
-.btn{
-  border:0;
-  border-radius:11px;
-  padding:12px 18px;
-  font-weight:750;
-  font-size:12px;
-  transition:.2s;
-}
-
-.btn:hover{transform:translateY(-1px)}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-  transform:none;
-}
-
-.btn-dark{
-  background:#111;
-  color:#fff;
-}
-
-.btn-burgundy{
-  background:var(--burgundy);
-  color:#fff;
-}
-
-.btn-light{
-  background:#f0f0ec;
-  color:#222;
-}
-
-.btn-green{
-  background:var(--green);
-  color:#fff;
-}
-
-.success{
-  display:none;
-  text-align:center;
-}
-
-.success.show{display:block}
-
-.success-icon{
-  width:74px;
-  height:74px;
-  margin:0 auto 18px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#eaf7ef;
-  color:var(--green);
-  font-size:32px;
-  font-weight:900;
-}
-
-.success h2{
-  font-size:30px;
-  margin-bottom:8px;
-}
-
-.success p{
-  color:#777;
-  max-width:650px;
-  margin:0 auto;
-  font-size:13px;
-}
-
-.ref{
-  display:inline-block;
-  margin:18px 0;
-  padding:10px 15px;
-  background:#111;
-  color:#fff;
-  border-radius:10px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.success-actions{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-top:20px;
-}
-
-.footer{
-  text-align:center;
-  color:#888;
-  font-size:10px;
-  padding:20px 15px 45px;
-}
-
-.toast{
-  position:fixed;
-  z-index:10000;
-  left:50%;
-  bottom:22px;
-  transform:translate(-50%,100px);
-  opacity:0;
-  background:#111;
-  color:white;
-  padding:12px 17px;
-  border-radius:11px;
-  font-size:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  transition:.25s;
-}
-
-.toast.show{
-  transform:translate(-50%,0);
-  opacity:1;
-}
-
-.loading{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9998;
-}
-
-.loading.show{display:flex}
-
-.loading-box{
-  background:#fff;
-  padding:28px;
-  border-radius:16px;
-  text-align:center;
-  width:min(90%,350px);
-}
-
-.spinner{
-  width:38px;
-  height:38px;
-  border:4px solid #ddd;
-  border-top-color:var(--burgundy);
-  border-radius:50%;
-  margin:0 auto 15px;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{to{transform:rotate(360deg)}}
-
-@media(max-width:760px){
-
-  .header-inner{
-    padding:15px;
-  }
-
-  .private-badge{display:none}
-
-  .hero-card{
-    padding:30px 22px;
-  }
-
-  .card{
-    padding:20px 16px;
-  }
-
-  .grid,
-  .choice-grid{
-    grid-template-columns:1fr;
-  }
-
-  .section h2{
-    font-size:25px;
-  }
-
-  .nav{
-    position:sticky;
-    bottom:0;
-    z-index:100;
-    background:#fff;
-    padding:12px 0;
-  }
-
-  .btn{
-    padding:11px 13px;
-  }
-}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f4f1;color:#171717}
+header{background:#111;color:#fff;padding:18px 5%;position:sticky;top:0;z-index:9}
+.brand{font-weight:800;letter-spacing:2px}.sub{font-size:10px;color:#aaa;letter-spacing:2px}
+.hero,.wrap{max-width:1050px;margin:25px auto;padding:0 16px}
+.heroBox{background:#181818;color:white;border-radius:22px;padding:38px}
+.hero h1{font-size:clamp(30px,5vw,50px);margin:10px 0}.hero p{color:#ccc}
+.card{background:#fff;border-radius:18px;padding:28px;box-shadow:0 10px 40px #00000010}
+.section{display:none}.section.active{display:block}
+.kicker{font-size:10px;color:#8f1830;font-weight:800;letter-spacing:2px}
+h2{font-size:28px;margin:7px 0}h3{margin-bottom:5px}
+.desc{color:#777;font-size:13px;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.full{grid-column:1/-1}
+label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d8d8d2;border-radius:10px;background:#fff}
+textarea{min-height:95px;resize:vertical}
+.choiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice{border:1px solid #ddd;padding:16px;border-radius:13px;cursor:pointer}
+.choice small{display:block;color:#888;margin:5px 0 0 22px}
+.subcard{background:#fafaf7;border:1px solid #e4e4dc;padding:20px;border-radius:14px;margin-top:22px}
+.conditional{display:none}.conditional.show{display:block}
+.nav{display:flex;justify-content:space-between;border-top:1px solid #eee;margin-top:30px;padding-top:20px}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}
+.dark{background:#111;color:#fff}.red{background:#8f1830;color:#fff}.light{background:#eee}
+.info{background:#f7f7f3;border:1px solid #ddd;padding:15px;border-radius:12px;color:#666;font-size:12px;margin-top:18px}
+.progress{max-width:1050px;margin:15px auto;padding:0 16px;color:#777;font-size:11px}
+.bar{height:6px;background:#ddd;border-radius:10px;margin-top:6px}.fill{height:100%;background:#8f1830;width:7%}
+footer{text-align:center;color:#888;font-size:10px;padding:30px}
+@media(max-width:700px){.grid,.choiceGrid{grid-template-columns:1fr}.heroBox,.card{padding:20px}h2{font-size:24px}}
+@media print{
+ header,.hero,.progress,.nav,footer{display:none!important}
+ body{background:white}.wrap{margin:0;max-width:none}.card{box-shadow:none}
+ .section{display:block!important;page-break-inside:avoid;margin-bottom:25px}
+ .printOnly{display:block!important}
+}
+.printOnly{display:none}
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="header-inner">
-
-    <div class="brand">
-      <div class="brand-icon">V</div>
-
-      <div>
-        <div class="brand-name">VELORA DIGITAL</div>
-        <div class="brand-sub">WEB · DESIGN · DIGITAL</div>
-      </div>
-    </div>
-
-    <div class="private-badge">
-      PRIVATE REQUIREMENT FORM
-    </div>
-
-  </div>
+<header>
+  <div class="brand">VELORA DIGITAL</div>
+  <div class="sub">WEB · DESIGN · DIGITAL</div>
 </header>
 
-<section class="hero">
-
-  <div class="hero-card">
-
-    <div class="hero-kicker">
-      MISBAH GROUP OF INSTITUTIONS
-    </div>
-
-    <h1>
-      Website & Digital Platform Requirement Collection
-    </h1>
-
-    <p>
-      Please complete this requirement form carefully. Your responses will
-      help Velora Digital prepare the complete website, admission system,
-      communication system and management features according to your needs.
-    </p>
-
-    <div class="hero-notice">
-      <strong>Important:</strong>
-      This is a management requirement form. It is not the student admission form.
-    </div>
-
-  </div>
-
-</section>
-
-<div class="progress-wrap">
-
-  <div class="progress-info">
-    <span id="progressText">Section 1 of 15</span>
-    <span id="progressPercent">7%</span>
-  </div>
-
-  <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
+<div class="hero">
+<div class="heroBox">
+<div style="font-size:11px;letter-spacing:2px;color:#aaa">MISBAH GROUP OF INSTITUTIONS</div>
+<h1>Website & Digital Platform Requirement Collection</h1>
+<p>Please provide the requirements required for the new institution website and digital platform.</p>
+<div class="info" style="color:#ddd;background:#ffffff10;border-color:#ffffff20">
+This is a management requirement form, not a student admission form.
+</div>
+</div>
 </div>
 
-<main class="container">
+<div class="progress">
+<span id="progressText">Section 1 of 15</span>
+<div class="bar"><div class="fill" id="fill"></div></div>
+</div>
 
-<form id="requirementForm" class="card">
+<div class="wrap">
 
-<!-- ===================================================== -->
-<!-- SECTION 1 -->
-<!-- ===================================================== -->
+<form id="form" class="card">
 
-<section class="section active" data-section="1">
-
-  <div class="kicker">01 / Institution Identity</div>
-
-  <h2>Institution Identity</h2>
-
-  <p class="section-desc">
-    Provide the official identity and contact information of the institution.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>
-        Official Institution / Group Name <span class="req">*</span>
-      </label>
-      <input
-        type="text"
-        name="institution_name"
-        required
-        placeholder="Example: Misbah Group of Institutions">
-    </div>
-
-    <div class="field">
-      <label>Short Name / Abbreviation</label>
-      <input type="text" name="short_name">
-    </div>
-
-    <div class="field">
-      <label>Official Email</label>
-      <input type="email" name="official_email">
-    </div>
-
-    <div class="field">
-      <label>Official Phone / Admission Number</label>
-      <input type="tel" name="official_phone">
-    </div>
-
-    <div class="field full">
-      <label>Full Official Address</label>
-      <textarea name="official_address"></textarea>
-    </div>
-
-    <div class="field">
-      <label>City</label>
-      <input type="text" name="city" value="Mangaluru">
-    </div>
-
-    <div class="field">
-      <label>State</label>
-      <input type="text" name="state" value="Karnataka">
-    </div>
-
-    <div class="field">
-      <label>Google Maps / Location Link</label>
-      <input type="url" name="maps_link">
-    </div>
-
-    <div class="field">
-      <label>Existing Website</label>
-      <input type="url" name="existing_website">
-    </div>
-
-  </div>
-
+<!-- 1 -->
+<section class="section active" data-s="1">
+<div class="kicker">01 / Institution Identity</div>
+<h2>Institution Identity</h2><p class="desc">Official institution information.</p>
+<div class="grid">
+<div><label>Official Institution / Group Name *</label><input required name="institution_name"></div>
+<div><label>Short Name</label><input name="short_name"></div>
+<div><label>Official Email</label><input type="email" name="official_email"></div>
+<div><label>Official Phone</label><input name="official_phone"></div>
+<div class="full"><label>Full Official Address</label><textarea name="official_address"></textarea></div>
+<div><label>City</label><input name="city" value="Mangaluru"></div>
+<div><label>State</label><input name="state" value="Karnataka"></div>
+<div><label>Google Maps Link</label><input name="maps_link"></div>
+<div><label>Existing Website</label><input name="existing_website"></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 2 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="2">
-
-  <div class="kicker">02 / Educational Sections</div>
-
-  <h2>Which sections does the institution have?</h2>
-
-  <p class="section-desc">
-    Select all applicable sections. Only the selected requirement sections
-    will appear later.
-  </p>
-
-  <div class="choice-grid">
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="sections"
-        value="School"
-        onchange="updateConditionalSections()">
-      <strong>School</strong>
-      <small>LKG, UKG, primary and other school classes.</small>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="sections"
-        value="Madrasa"
-        onchange="updateConditionalSections()">
-      <strong>Madrasa</strong>
-      <small>Madrasa / Islamic education conducted within the school.</small>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="sections"
-        value="PUC"
-        onchange="updateConditionalSections()">
-      <strong>PUC</strong>
-      <small>Pre-University education.</small>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="sections"
-        value="Degree"
-        onchange="updateConditionalSections()">
-      <strong>Degree / Higher Education</strong>
-      <small>Degree and other higher education programs.</small>
-    </label>
-
-  </div>
-
-  <div class="info-box">
-    <strong>Madrasa structure:</strong>
-    If Madrasa is part of the School, the Madrasa requirements will appear
-    inside the School Requirements section instead of becoming a separate
-    main institution section.
-  </div>
-
+<!-- 2 -->
+<section class="section" data-s="2">
+<div class="kicker">02 / Educational Sections</div>
+<h2>Select Educational Sections</h2>
+<p class="desc">Only selected requirement sections will appear.</p>
+<div class="choiceGrid">
+<label class="choice"><input type="checkbox" name="sections" value="School" onchange="logic()"> <b>School</b><small>LKG, UKG, 1st and other school classes.</small></label>
+<label class="choice"><input type="checkbox" name="sections" value="Madrasa" onchange="logic()"> <b>Madrasa</b><small>Madrasa conducted inside the school.</small></label>
+<label class="choice"><input type="checkbox" name="sections" value="PUC" onchange="logic()"> <b>PUC</b><small>Pre-University education.</small></label>
+<label class="choice"><input type="checkbox" name="sections" value="Degree" onchange="logic()"> <b>Degree / Higher Education</b><small>Degree and higher education.</small></label>
+</div>
+<div class="info"><b>Important:</b> If Madrasa is selected with School, Madrasa requirements appear inside the School section.</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 3 SCHOOL -->
-<!-- ===================================================== -->
+<!-- 3 -->
+<section class="section" data-s="3">
+<div class="kicker">03 / School Requirements</div>
+<h2>School Requirements</h2>
+<div class="grid">
+<div><label>School Name</label><input name="school_name"></div>
+<div><label>School Contact</label><input name="school_phone"></div>
+<div class="full"><label>Classes Offered</label><textarea name="school_classes"></textarea></div>
+<div><label>Board / Curriculum</label><input name="school_board"></div>
+<div><label>School Timing</label><input name="school_timing"></div>
+<div class="full"><label>Facilities</label><textarea name="school_facilities"></textarea></div>
+<div class="full"><label>Activities</label><textarea name="school_activities"></textarea></div>
+<div class="full"><label>Other School Requirements</label><textarea name="school_other"></textarea></div>
+</div>
 
-<section class="section" data-section="3">
-
-  <div class="kicker">03 / School Requirements</div>
-
-  <h2>School Requirements</h2>
-
-  <p class="section-desc">
-    Complete this section for the School website content and requirements.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>School Name</label>
-      <input type="text" name="school_name">
-    </div>
-
-    <div class="field">
-      <label>School Contact Number</label>
-      <input type="tel" name="school_phone">
-    </div>
-
-    <div class="field full">
-      <label>Classes Offered</label>
-      <textarea
-        name="school_classes"
-        placeholder="Example: LKG, UKG, 1st to 6th"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Curriculum / Board</label>
-      <input type="text" name="school_board">
-    </div>
-
-    <div class="field">
-      <label>School Timing</label>
-      <input type="text" name="school_timing">
-    </div>
-
-    <div class="field full">
-      <label>School Facilities</label>
-      <textarea
-        name="school_facilities"
-        placeholder="Classrooms, library, labs, playground, transport, etc."></textarea>
-    </div>
-
-    <div class="field full">
-      <label>School Activities</label>
-      <textarea name="school_activities"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Other School Requirements</label>
-      <textarea name="school_other"></textarea>
-    </div>
-
-  </div>
-
-  <!-- MADRASA INSIDE SCHOOL -->
-
-  <div
-    class="sub-card conditional"
-    id="madrasaInsideSchool">
-
-    <h3>☪ Madrasa / Islamic Education — Inside School</h3>
-
-    <p>
-      Since Madrasa is conducted within the School structure,
-      provide its requirements here.
-    </p>
-
-    <div class="grid">
-
-      <div class="field">
-        <label>Madrasa / Section Name</label>
-        <input type="text" name="madrasa_name">
-      </div>
-
-      <div class="field">
-        <label>Madrasa Timing</label>
-        <input type="text" name="madrasa_timing">
-      </div>
-
-      <div class="field full">
-        <label>Madrasa Classes / Levels</label>
-        <textarea name="madrasa_classes"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Subjects / Islamic Studies</label>
-        <textarea
-          name="madrasa_subjects"
-          placeholder="Quran, Hadith, Fiqh, Arabic, etc."></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Madrasa Activities</label>
-        <textarea name="madrasa_activities"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Other Madrasa Requirements</label>
-        <textarea name="madrasa_other"></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
+<div id="madrasa" class="subcard conditional">
+<h3>☪ Madrasa / Islamic Education — Inside School</h3>
+<p class="desc">Madrasa requirements are collected here because it operates within the School.</p>
+<div class="grid">
+<div><label>Madrasa / Section Name</label><input name="madrasa_name"></div>
+<div><label>Madrasa Timing</label><input name="madrasa_timing"></div>
+<div class="full"><label>Madrasa Classes / Levels</label><textarea name="madrasa_classes"></textarea></div>
+<div class="full"><label>Subjects / Islamic Studies</label><textarea name="madrasa_subjects"></textarea></div>
+<div class="full"><label>Activities</label><textarea name="madrasa_activities"></textarea></div>
+<div class="full"><label>Other Madrasa Requirements</label><textarea name="madrasa_other"></textarea></div>
+</div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 4 PUC -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="4">
-
-  <div class="kicker">04 / PUC Requirements</div>
-
-  <h2>PUC Requirements</h2>
-
-  <p class="section-desc">
-    Complete this section if PUC is part of the institution.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>PUC Institution / Section Name</label>
-      <input type="text" name="puc_name">
-    </div>
-
-    <div class="field">
-      <label>PUC Contact Number</label>
-      <input type="tel" name="puc_phone">
-    </div>
-
-    <div class="field full">
-      <label>Courses / Streams Offered</label>
-      <textarea name="puc_streams"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Subjects / Combinations</label>
-      <textarea name="puc_subjects"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Facilities</label>
-      <textarea name="puc_facilities"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Admission Information</label>
-      <textarea name="puc_admission"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Other PUC Requirements</label>
-      <textarea name="puc_other"></textarea>
-    </div>
-
-  </div>
-
+<!-- 4 -->
+<section class="section" data-s="4">
+<div class="kicker">04 / PUC Requirements</div><h2>PUC Requirements</h2>
+<div class="grid">
+<div><label>PUC Name</label><input name="puc_name"></div>
+<div><label>Contact</label><input name="puc_phone"></div>
+<div class="full"><label>Courses / Streams</label><textarea name="puc_streams"></textarea></div>
+<div class="full"><label>Subjects / Combinations</label><textarea name="puc_subjects"></textarea></div>
+<div class="full"><label>Facilities</label><textarea name="puc_facilities"></textarea></div>
+<div class="full"><label>Admission Information</label><textarea name="puc_admission"></textarea></div>
+<div class="full"><label>Other PUC Requirements</label><textarea name="puc_other"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 5 DEGREE -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="5">
-
-  <div class="kicker">05 / Degree & Higher Education</div>
-
-  <h2>Degree / Higher Education</h2>
-
-  <p class="section-desc">
-    Complete this section for Degree and other higher education programs.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>Institution / College Name</label>
-      <input type="text" name="degree_name">
-    </div>
-
-    <div class="field">
-      <label>Contact Number</label>
-      <input type="tel" name="degree_phone">
-    </div>
-
-    <div class="field full">
-      <label>Degree Courses</label>
-      <textarea name="degree_courses"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Departments</label>
-      <textarea name="degree_departments"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Eligibility Requirements</label>
-      <textarea name="degree_eligibility"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Facilities / Campus Information</label>
-      <textarea name="degree_facilities"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Other Degree Requirements</label>
-      <textarea name="degree_other"></textarea>
-    </div>
-
-  </div>
-
+<!-- 5 -->
+<section class="section" data-s="5">
+<div class="kicker">05 / Degree</div><h2>Degree / Higher Education</h2>
+<div class="grid">
+<div><label>Institution / College Name</label><input name="degree_name"></div>
+<div><label>Contact</label><input name="degree_phone"></div>
+<div class="full"><label>Degree Courses</label><textarea name="degree_courses"></textarea></div>
+<div class="full"><label>Departments</label><textarea name="degree_departments"></textarea></div>
+<div class="full"><label>Eligibility</label><textarea name="degree_eligibility"></textarea></div>
+<div class="full"><label>Facilities</label><textarea name="degree_facilities"></textarea></div>
+<div class="full"><label>Other Degree Requirements</label><textarea name="degree_other"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 6 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="6">
-
-  <div class="kicker">06 / Website Content</div>
-
-  <h2>Website Content</h2>
-
-  <p class="section-desc">
-    Tell us what information should appear on the main website.
-  </p>
-
-  <div class="grid">
-
-    <div class="field full">
-      <label>About Institution</label>
-      <textarea name="website_about"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Vision & Mission</label>
-      <textarea name="vision_mission"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Chairman / Management / Principal Message</label>
-      <textarea name="management_message"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Programs / Courses</label>
-      <textarea name="website_programs"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Campus & Facilities</label>
-      <textarea name="campus_facilities"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Student Life / Activities</label>
-      <textarea name="student_life"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>News / Announcements</label>
-      <textarea name="news_requirements"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Other Pages / Features</label>
-      <textarea name="other_pages"></textarea>
-    </div>
-
-  </div>
-
+<!-- 6 -->
+<section class="section" data-s="6">
+<div class="kicker">06 / Website Content</div><h2>Website Content</h2>
+<div class="grid">
+<div class="full"><label>About Institution</label><textarea name="website_about"></textarea></div>
+<div class="full"><label>Vision & Mission</label><textarea name="vision_mission"></textarea></div>
+<div class="full"><label>Chairman / Principal / Management Message</label><textarea name="management_message"></textarea></div>
+<div class="full"><label>Programs / Courses</label><textarea name="website_programs"></textarea></div>
+<div class="full"><label>Campus & Facilities</label><textarea name="campus_facilities"></textarea></div>
+<div class="full"><label>Student Life / Activities</label><textarea name="student_life"></textarea></div>
+<div class="full"><label>News / Announcements</label><textarea name="news_requirements"></textarea></div>
+<div class="full"><label>Other Pages / Features</label><textarea name="other_pages"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 7 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="7">
-
-  <div class="kicker">07 / Photos, Videos & Media</div>
-
-  <h2>Photos, Videos & Media</h2>
-
-  <p class="section-desc">
-    Tell us what media will be provided.
-  </p>
-
-  <div class="grid">
-
-    <div class="field full">
-      <label>Photos Available</label>
-      <textarea
-        name="photos_available"
-        placeholder="Campus, classrooms, staff, students, events, etc."></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Videos Available</label>
-      <textarea name="videos_available"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Official Social Media Links</label>
-      <textarea
-        name="social_links"
-        placeholder="Instagram, Facebook, YouTube, etc."></textarea>
-    </div>
-
-    <div class="field full">
-
-      <label>Upload Logo / Existing Assets</label>
-
-      <div class="file-box">
-
-        <input
-          type="file"
-          name="brand_files"
-          multiple
-          accept="image/*,.pdf,.doc,.docx">
-
-        <div
-          class="file-list"
-          id="brandFilesList">
-          No files selected.
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="field full">
-      <label>Media / Gallery Notes</label>
-      <textarea name="media_notes"></textarea>
-    </div>
-
-  </div>
-
+<!-- 7 -->
+<section class="section" data-s="7">
+<div class="kicker">07 / Photos & Media</div><h2>Photos, Videos & Media</h2>
+<div class="grid">
+<div class="full"><label>Photos Available</label><textarea name="photos_available" placeholder="Campus, classrooms, staff, students, events, etc."></textarea></div>
+<div class="full"><label>Videos Available</label><textarea name="videos_available"></textarea></div>
+<div class="full"><label>Official Social Media Links</label><textarea name="social_links"></textarea></div>
+<div class="full"><label>Upload Logo / Existing Assets</label><input type="file" name="brand_files" multiple><small>Files are used only on this device and are not uploaded to GitHub.</small></div>
+<div class="full"><label>Media Notes</label><textarea name="media_notes"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 8 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="8">
-
-  <div class="kicker">08 / Digital Admission Application</div>
-
-  <h2>Digital Admission Application</h2>
-
-  <p class="section-desc">
-    This section defines what the future online student admission system should collect.
-  </p>
-
-  <div class="sub-card">
-
-    <h3>Student Details</h3>
-
-    <p>Tell us the information required from students.</p>
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Student Information Required</label>
-        <textarea
-          name="admission_student_details"
-          placeholder="Full name, DOB, gender, address, ID, nationality, etc."></textarea>
-      </div>
-
-      <div class="field full">
-
-        <label>Student Photo Required?</label>
-
-        <div class="radio-row">
-
-          <label class="radio">
-            <input type="radio" name="student_photo" value="Yes">
-            Yes
-          </label>
-
-          <label class="radio">
-            <input type="radio" name="student_photo" value="No">
-            No
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="sub-card">
-
-    <h3>Parent / Guardian Details</h3>
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Parent / Guardian Information Required</label>
-        <textarea
-          name="parent_details"
-          placeholder="Father, mother, guardian, occupation, phone, email, address, etc."></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="sub-card">
-
-    <h3>Academic Details</h3>
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Academic Information Required</label>
-        <textarea
-          name="academic_details"
-          placeholder="Previous institution, class, marks, certificates, subjects, etc."></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="sub-card">
-
-    <h3>Documents & Additional Details</h3>
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Documents Students Must Upload</label>
-        <textarea name="admission_documents"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Additional Details</label>
-        <textarea name="admission_additional"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Declaration / Consent</label>
-        <textarea name="admission_declaration"></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="sub-card">
-
-    <h3>Application Submission & Notification</h3>
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Who should receive submitted applications?</label>
-        <textarea name="application_recipients"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Official Application Email(s)</label>
-        <input type="text" name="application_emails">
-      </div>
-
-      <div class="field">
-        <label>Official WhatsApp Number</label>
-        <input type="tel" name="application_whatsapp">
-      </div>
-
-      <div class="field">
-
-        <label>Generate Reference Number?</label>
-
-        <div class="radio-row">
-
-          <label class="radio">
-            <input type="radio" name="reference_number" value="Yes">
-            Yes
-          </label>
-
-          <label class="radio">
-            <input type="radio" name="reference_number" value="No">
-            No
-          </label>
-
-        </div>
-
-      </div>
-
-      <div class="field">
-
-        <label>Application Fee?</label>
-
-        <div class="radio-row">
-
-          <label class="radio">
-            <input type="radio" name="application_fee" value="Yes">
-            Yes
-          </label>
-
-          <label class="radio">
-            <input type="radio" name="application_fee" value="No">
-            No
-          </label>
-
-        </div>
-
-      </div>
-
-      <div class="field full">
-        <label>Application Fee Process</label>
-        <textarea name="fee_process"></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
+<!-- 8 -->
+<section class="section" data-s="8">
+<div class="kicker">08 / Digital Admission Application</div><h2>Digital Admission Application</h2>
+<p class="desc">Define the future student admission application.</p>
+<div class="subcard"><h3>Student Details</h3><div class="grid">
+<div class="full"><label>Student Information Required</label><textarea name="admission_student_details" placeholder="Full name, DOB, gender, address, ID, etc."></textarea></div>
+<div class="full"><label>Student Photo Required?</label><input type="text" name="student_photo" placeholder="Yes / No"></div>
+</div></div>
+<div class="subcard"><h3>Parent / Guardian</h3><textarea name="parent_details" placeholder="Father, mother, guardian, occupation, phone, email, etc."></textarea></div>
+<div class="subcard"><h3>Academic Details</h3><textarea name="academic_details" placeholder="Previous institution, class, marks, certificates, subjects, etc."></textarea></div>
+<div class="subcard"><h3>Documents & Additional Details</h3><div class="grid">
+<div class="full"><label>Documents Students Must Upload</label><textarea name="admission_documents"></textarea></div>
+<div class="full"><label>Additional Details</label><textarea name="admission_additional"></textarea></div>
+<div class="full"><label>Declaration / Consent</label><textarea name="admission_declaration"></textarea></div>
+</div></div>
+<div class="subcard"><h3>Submission & Notification</h3><div class="grid">
+<div class="full"><label>Who Should Receive Applications?</label><textarea name="application_recipients"></textarea></div>
+<div><label>Official Application Email(s)</label><input name="application_emails"></div>
+<div><label>Official WhatsApp</label><input name="application_whatsapp"></div>
+<div><label>Generate Reference Number?</label><input name="reference_number"></div>
+<div><label>Application Fee?</label><input name="application_fee"></div>
+<div class="full"><label>Fee Process</label><textarea name="fee_process"></textarea></div>
+</div></div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 9 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="9">
-
-  <div class="kicker">09 / Application PDF Format</div>
-
-  <h2>Application PDF Requirements</h2>
-
-  <p class="section-desc">
-    Tell us exactly how the future admission application PDF should appear.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>Official PDF Title / Heading</label>
-      <input
-        type="text"
-        name="pdf_title"
-        placeholder="Admission Application Form">
-    </div>
-
-    <div class="field">
-
-      <label>Reference Number on PDF?</label>
-
-      <select name="pdf_reference">
-
-        <option value="">Select</option>
-        <option>Yes</option>
-        <option>No</option>
-
-      </select>
-
-    </div>
-
-    <div class="field full">
-      <label>Fields That Must Appear in PDF</label>
-      <textarea name="pdf_fields"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Office-Use Section</label>
-      <textarea
-        name="pdf_office_use"
-        placeholder="Verification, status, remarks, signature, etc."></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Signature / Declaration Area</label>
-      <textarea name="pdf_signature"></textarea>
-    </div>
-
-    <div class="field full">
-
-      <label>Upload Existing PDF Sample / Reference</label>
-
-      <div class="file-box">
-
-        <input
-          type="file"
-          name="pdf_sample"
-          multiple
-          accept=".pdf,image/*">
-
-        <div
-          class="file-list"
-          id="pdfFilesList">
-          No files selected.
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
+<!-- 9 -->
+<section class="section" data-s="9">
+<div class="kicker">09 / PDF Application Format</div><h2>Application PDF Requirements</h2>
+<div class="grid">
+<div><label>Official PDF Title</label><input name="pdf_title" placeholder="Admission Application Form"></div>
+<div><label>Reference Number on PDF?</label><input name="pdf_reference"></div>
+<div class="full"><label>Fields Required in PDF</label><textarea name="pdf_fields"></textarea></div>
+<div class="full"><label>Office-Use Section</label><textarea name="pdf_office_use"></textarea></div>
+<div class="full"><label>Signature / Declaration</label><textarea name="pdf_signature"></textarea></div>
+<div class="full"><label>Upload Existing PDF Sample</label><input type="file" name="pdf_sample" multiple></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 10 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="10">
-
-  <div class="kicker">10 / Enquiry & Communication</div>
-
-  <h2>Enquiry & Communication</h2>
-
-  <p class="section-desc">
-    Define how enquiries should reach the institution.
-  </p>
-
-  <div class="grid">
-
-    <div class="field full">
-      <label>General Enquiry Process</label>
-      <textarea name="general_enquiry_process"></textarea>
-    </div>
-
-    <div class="field">
-      <label>General Enquiry Email</label>
-      <input type="email" name="general_enquiry_email">
-    </div>
-
-    <div class="field">
-      <label>Admission Contact Number</label>
-      <input type="tel" name="admission_contact">
-    </div>
-
-    <div class="field">
-      <label>Admission Office Email</label>
-      <input type="email" name="admission_email">
-    </div>
-
-    <div class="field">
-      <label>Preferred Response Process</label>
-
-      <select name="response_method">
-
-        <option value="">Select</option>
-        <option>Phone Call</option>
-        <option>WhatsApp</option>
-        <option>Email</option>
-        <option>Phone + WhatsApp</option>
-        <option>Email + WhatsApp</option>
-        <option>Other</option>
-
-      </select>
-
-    </div>
-
-    <div class="field full">
-      <label>Departments / Recipients for Different Enquiries</label>
-      <textarea name="enquiry_departments"></textarea>
-    </div>
-
-  </div>
-
+<!-- 10 -->
+<section class="section" data-s="10">
+<div class="kicker">10 / Enquiry & Communication</div><h2>Enquiry & Communication</h2>
+<div class="grid">
+<div class="full"><label>General Enquiry Process</label><textarea name="general_enquiry_process"></textarea></div>
+<div><label>General Enquiry Email</label><input type="email" name="general_enquiry_email"></div>
+<div><label>Admission Contact</label><input name="admission_contact"></div>
+<div><label>Admission Office Email</label><input type="email" name="admission_email"></div>
+<div><label>Preferred Response Process</label><input name="response_method" placeholder="Phone / WhatsApp / Email"></div>
+<div class="full"><label>Departments / Recipients</label><textarea name="enquiry_departments"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 11 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="11">
-
-  <div class="kicker">11 / Admin & Management</div>
-
-  <h2>Admin / Management Requirements</h2>
-
-  <p class="section-desc">
-    Select what should be manageable from the future administration panel.
-  </p>
-
-  <div class="choice-grid">
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="View Admission Applications">
-      <strong>View Admission Applications</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Download Application PDFs">
-      <strong>Download Application PDFs</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Search and Filter">
-      <strong>Search / Filter Applications</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Application Status">
-      <strong>Application Status Tracking</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Manage Enquiries">
-      <strong>Manage Website Enquiries</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="News Management">
-      <strong>News / Announcement Management</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Gallery Management">
-      <strong>Gallery Management</strong>
-    </label>
-
-    <label class="choice">
-      <input
-        type="checkbox"
-        name="admin_features"
-        value="Course Management">
-      <strong>Course Management</strong>
-    </label>
-
-  </div>
-
-  <div class="grid" style="margin-top:20px">
-
-    <div class="field">
-      <label>Multiple Staff / Admin Accounts?</label>
-
-      <select name="multiple_admin">
-        <option value="">Select</option>
-        <option>Yes</option>
-        <option>No</option>
-        <option>Not sure</option>
-      </select>
-
-    </div>
-
-    <div class="field">
-      <label>Other Admin Requirements</label>
-      <textarea name="other_admin"></textarea>
-    </div>
-
-  </div>
-
+<!-- 11 -->
+<section class="section" data-s="11">
+<div class="kicker">11 / Admin</div><h2>Admin / Management Requirements</h2>
+<div class="choiceGrid">
+<label class="choice"><input type="checkbox" name="admin" value="View Admission Applications"> View Admission Applications</label>
+<label class="choice"><input type="checkbox" name="admin" value="Download Application PDFs"> Download Application PDFs</label>
+<label class="choice"><input type="checkbox" name="admin" value="Search and Filter"> Search / Filter Applications</label>
+<label class="choice"><input type="checkbox" name="admin" value="Application Status"> Application Status Tracking</label>
+<label class="choice"><input type="checkbox" name="admin" value="Manage Enquiries"> Manage Website Enquiries</label>
+<label class="choice"><input type="checkbox" name="admin" value="News Management"> News / Announcement Management</label>
+<label class="choice"><input type="checkbox" name="admin" value="Gallery Management"> Gallery Management</label>
+<label class="choice"><input type="checkbox" name="admin" value="Course Management"> Course Management</label>
+</div>
+<div class="grid" style="margin-top:18px">
+<div><label>Multiple Staff/Admin Accounts?</label><input name="multiple_admin"></div>
+<div><label>Other Admin Requirements</label><textarea name="other_admin"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 12 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="12">
-
-  <div class="kicker">12 / Domain, Hosting & Accounts</div>
-
-  <h2>Domain & Hosting</h2>
-
-  <p class="section-desc">
-    Tell us the current domain and hosting situation.
-  </p>
-
-  <div class="grid">
-
-    <div class="field">
-
-      <label>Domain Already Available?</label>
-
-      <select name="domain_status">
-        <option value="">Select</option>
-        <option>Yes</option>
-        <option>No</option>
-        <option>Not sure</option>
-      </select>
-
-    </div>
-
-    <div class="field">
-      <label>Preferred Domain Name</label>
-      <input type="text" name="preferred_domain">
-    </div>
-
-    <div class="field">
-
-      <label>Hosting Already Available?</label>
-
-      <select name="hosting_status">
-        <option value="">Select</option>
-        <option>Yes</option>
-        <option>No</option>
-        <option>Not sure</option>
-      </select>
-
-    </div>
-
-    <div class="field">
-      <label>Official Email Accounts</label>
-      <input type="text" name="official_accounts">
-    </div>
-
-    <div class="field full">
-      <label>Other Official Accounts / Access Requirements</label>
-      <textarea name="account_requirements"></textarea>
-    </div>
-
-  </div>
-
+<!-- 12 -->
+<section class="section" data-s="12">
+<div class="kicker">12 / Domain & Hosting</div><h2>Domain, Hosting & Accounts</h2>
+<div class="grid">
+<div><label>Domain Available?</label><input name="domain_status"></div>
+<div><label>Preferred Domain</label><input name="preferred_domain"></div>
+<div><label>Hosting Available?</label><input name="hosting_status"></div>
+<div><label>Official Email Accounts</label><input name="official_accounts"></div>
+<div class="full"><label>Other Accounts / Access Requirements</label><textarea name="account_requirements"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 13 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="13">
-
-  <div class="kicker">13 / Legal, Privacy & Approval</div>
-
-  <h2>Legal & Approval</h2>
-
-  <p class="section-desc">
-    Provide privacy, legal and management approval requirements.
-  </p>
-
-  <div class="grid">
-
-    <div class="field full">
-      <label>Privacy Policy Requirements</label>
-      <textarea name="privacy_requirements"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Terms / Disclaimer Requirements</label>
-      <textarea name="terms_requirements"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Student Data / Document Handling Requirements</label>
-      <textarea name="student_data_policy"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Who Will Approve Website Content?</label>
-      <input type="text" name="approval_person">
-    </div>
-
-    <div class="field full">
-      <label>Other Legal / Approval Notes</label>
-      <textarea name="legal_notes"></textarea>
-    </div>
-
-  </div>
-
+<!-- 13 -->
+<section class="section" data-s="13">
+<div class="kicker">13 / Legal & Privacy</div><h2>Legal, Privacy & Approval</h2>
+<div class="grid">
+<div class="full"><label>Privacy Policy Requirements</label><textarea name="privacy_requirements"></textarea></div>
+<div class="full"><label>Terms / Disclaimer</label><textarea name="terms_requirements"></textarea></div>
+<div class="full"><label>Student Data / Document Handling</label><textarea name="student_data_policy"></textarea></div>
+<div><label>Who Approves Website Content?</label><input name="approval_person"></div>
+<div><label>Other Legal Notes</label><textarea name="legal_notes"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 14 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="14">
-
-  <div class="kicker">14 / Special Requirements</div>
-
-  <h2>Final Content & Special Requirements</h2>
-
-  <p class="section-desc">
-    Add anything that has not already been covered.
-  </p>
-
-  <div class="grid">
-
-    <div class="field full">
-      <label>Special Website Features</label>
-      <textarea name="special_features"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Design Preferences</label>
-      <textarea name="design_preferences"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Reference Websites</label>
-      <textarea name="reference_websites"></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Additional Requirements</label>
-      <textarea name="additional_requirements"></textarea>
-    </div>
-
-  </div>
-
+<!-- 14 -->
+<section class="section" data-s="14">
+<div class="kicker">14 / Special Requirements</div><h2>Final Content & Special Requirements</h2>
+<div class="grid">
+<div class="full"><label>Special Website Features</label><textarea name="special_features"></textarea></div>
+<div class="full"><label>Design Preferences</label><textarea name="design_preferences"></textarea></div>
+<div class="full"><label>Reference Websites</label><textarea name="reference_websites"></textarea></div>
+<div class="full"><label>Additional Requirements</label><textarea name="additional_requirements"></textarea></div>
+</div>
 </section>
 
-<!-- ===================================================== -->
-<!-- SECTION 15 -->
-<!-- ===================================================== -->
-
-<section class="section" data-section="15">
-
-  <div class="kicker">15 / Final Confirmation</div>
-
-  <h2>Review & Submit</h2>
-
-  <p class="section-desc">
-    Confirm the information and generate the requirement PDF.
-  </p>
-
-  <div class="info-box">
-
-    <strong>When you press Generate & Submit:</strong>
-
-    <ul style="margin:10px 0 0 18px">
-
-      <li>The information will be collected.</li>
-
-      <li>A requirement PDF will be generated.</li>
-
-      <li>The PDF will be downloaded.</li>
-
-      <li>A Share option will be available on supported devices.</li>
-
-      <li>You can send the PDF through WhatsApp or Gmail.</li>
-
-    </ul>
-
-  </div>
-
-  <div class="field" style="margin-top:22px">
-
-    <label>
-      <input
-        type="checkbox"
-        id="confirmation"
-        required>
-
-      I confirm that the information provided is accurate to the best of my knowledge.
-      <span class="req">*</span>
-
-    </label>
-
-  </div>
-
-  <div class="grid">
-
-    <div class="field">
-      <label>
-        Name of Person Filling This Form <span class="req">*</span>
-      </label>
-
-      <input
-        type="text"
-        name="submitted_by"
-        required>
-    </div>
-
-    <div class="field">
-      <label>Designation</label>
-      <input type="text" name="submitter_designation">
-    </div>
-
-    <div class="field">
-      <label>Submission Date</label>
-      <input
-        type="date"
-        name="submission_date"
-        id="submissionDate">
-    </div>
-
-  </div>
-
+<!-- 15 -->
+<section class="section" data-s="15">
+<div class="kicker">15 / Final Confirmation</div><h2>Review & Submit</h2>
+<div class="info">
+When you press <b>Generate & Submit</b>, a complete printable requirement document will open immediately. You can choose <b>Save as PDF</b> from the browser print screen.
+</div>
+<br>
+<label><input type="checkbox" id="confirm" required> I confirm that the information provided is accurate.</label>
+<br>
+<div class="grid">
+<div><label>Name of Person Filling Form *</label><input required name="submitted_by"></div>
+<div><label>Designation</label><input name="designation"></div>
+<div><label>Submission Date</label><input type="date" name="submission_date" id="date"></div>
+</div>
 </section>
-
-<!-- ===================================================== -->
-<!-- NAVIGATION -->
-<!-- ===================================================== -->
 
 <div class="nav">
-
-  <button
-    type="button"
-    class="btn btn-light"
-    id="prevBtn"
-    onclick="previousSection()">
-    ← Back
-  </button>
-
-  <div class="nav-right">
-
-    <button
-      type="button"
-      class="btn btn-light"
-      onclick="saveDraft()">
-      Save Draft
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-dark"
-      id="nextBtn"
-      onclick="nextSection()">
-      Next →
-    </button>
-
-    <button
-      type="submit"
-      class="btn btn-burgundy"
-      id="submitBtn"
-      style="display:none">
-      Generate & Submit
-    </button>
-
-  </div>
-
+<button type="button" class="light" id="back" onclick="back()">← Back</button>
+<div>
+<button type="button" class="light" onclick="draft()">Save Draft</button>
+<button type="button" class="dark" id="next" onclick="next()">Next →</button>
+<button type="submit" class="red" id="submit" style="display:none">Generate & Submit</button>
+</div>
 </div>
 
 </form>
-
-<!-- ===================================================== -->
-<!-- SUCCESS SCREEN -->
-<!-- ===================================================== -->
-
-<div
-  class="card success"
-  id="successScreen">
-
-  <div class="success-icon">✓</div>
-
-  <h2>Requirement Submitted Successfully</h2>
-
-  <p>
-    Your requirement document has been generated successfully.
-  </p>
-
-  <div class="ref" id="referenceDisplay">
-    VELORA-MGI-000000
-  </div>
-
-  <p>
-    The PDF has been downloaded to this device.
-    You can now share the PDF with Velora Digital through WhatsApp or Gmail.
-  </p>
-
-  <div class="success-actions">
-
-    <button
-      class="btn btn-burgundy"
-      onclick="sharePDF()">
-      📤 Share PDF
-    </button>
-
-    <button
-      class="btn btn-dark"
-      onclick="downloadAgain()">
-      📄 Download PDF Again
-    </button>
-
-    <button
-      class="btn btn-green"
-      onclick="openWhatsApp()">
-      WhatsApp
-    </button>
-
-    <button
-      class="btn btn-light"
-      onclick="openEmail()">
-      Gmail / Email
-    </button>
-
-  </div>
-
-  <div class="info-box" style="margin-top:25px">
-
-    <strong>Important:</strong>
-
-    WhatsApp and Gmail do not allow a public GitHub HTML page
-    to silently attach and send a PDF without user interaction.
-    The Share button uses the phone/browser's official sharing system
-    when supported.
-
-  </div>
-
 </div>
 
-</main>
-
-<footer class="footer">
-
-  VELORA DIGITAL · Web Design · Digital Solutions<br>
-  Private Requirement Collection · Misbah Group of Institutions
-
-</footer>
-
-<div class="toast" id="toast"></div>
-
-<div class="loading" id="loading">
-
-  <div class="loading-box">
-
-    <div class="spinner"></div>
-
-    <strong id="loadingText">
-      Preparing your requirement PDF...
-    </strong>
-
-    <p
-      style="font-size:11px;color:#777;margin-top:7px">
-      Please wait.
-    </p>
-
-  </div>
-
-</div>
+<footer>VELORA DIGITAL · MISBAH GROUP OF INSTITUTIONS REQUIREMENT COLLECTION</footer>
 
 <script>
 /* =========================================================
-   VELORA DIGITAL
-   MISBAH GROUP REQUIREMENT FORM
-   FINAL SINGLE-FILE VERSION
+   PUT YOUR REAL DETAILS HERE
 ========================================================= */
 
+const VELORA_WHATSAPP="918088590273";
+const VELORA_EMAIL="YOUR_REAL_VELORA_EMAIL@gmail.com";
 
-/* =========================================================
-   PUT YOUR OFFICIAL VELORA CONTACT DETAILS HERE
-========================================================= */
+/* ========================================================= */
 
-const VELORA_WHATSAPP = "+918088590273";
-const VELORA_EMAIL = "veloradigitalco.in@gmail.com";
+const form=document.getElementById("form");
+let current=1;
 
+document.getElementById("date").value=new Date().toISOString().slice(0,10);
 
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
-
-const form = document.getElementById("requirementForm");
-
-const sections =
-  [...document.querySelectorAll(".section")];
-
-let currentSection = 1;
-
-let generatedPDFBlob = null;
-
-let generatedPDFFile = null;
-
-let generatedPDFName =
-  "Misbah_Group_Requirement.pdf";
-
-let requirementID = "";
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-document.getElementById("submissionDate").value =
-  new Date().toISOString().split("T")[0];
-
-
-/* =========================================================
-   SECTION LOGIC
-========================================================= */
-
-function getSelectedSections(){
-
-  return [
-    ...document.querySelectorAll(
-      'input[name="sections"]:checked'
-    )
-  ].map(input => input.value);
-
+function selected(){
+ return [...document.querySelectorAll('input[name="sections"]:checked')].map(x=>x.value);
 }
 
-
-function updateConditionalSections(){
-
-  const selected =
-    getSelectedSections();
-
-  const school =
-    selected.includes("School");
-
-  const madrasa =
-    selected.includes("Madrasa");
-
-  const schoolSection =
-    document.querySelector(
-      '.section[data-section="3"]'
-    );
-
-  const pucSection =
-    document.querySelector(
-      '.section[data-section="4"]'
-    );
-
-  const degreeSection =
-    document.querySelector(
-      '.section[data-section="5"]'
-    );
-
-  schoolSection.style.display =
-    school ? "" : "none";
-
-  pucSection.style.display =
-    selected.includes("PUC") ? "" : "none";
-
-  degreeSection.style.display =
-    selected.includes("Degree") ? "" : "none";
-
-
-  const madrasaBox =
-    document.getElementById(
-      "madrasaInsideSchool"
-    );
-
-  if(school && madrasa){
-
-    madrasaBox.classList.add("show");
-
-  }else{
-
-    madrasaBox.classList.remove("show");
-
-  }
-
-  updateUI();
-
+function visible(){
+ let a=[1,2],s=selected();
+ if(s.includes("School"))a.push(3);
+ if(s.includes("PUC"))a.push(4);
+ if(s.includes("Degree"))a.push(5);
+ return a.concat([6,7,8,9,10,11,12,13,14,15]);
 }
 
-
-/* =========================================================
-   VISIBLE SECTIONS
-========================================================= */
-
-function getVisibleSections(){
-
-  const selected =
-    getSelectedSections();
-
-  const result = [1,2];
-
-  if(selected.includes("School")){
-    result.push(3);
-  }
-
-  if(selected.includes("PUC")){
-    result.push(4);
-  }
-
-  if(selected.includes("Degree")){
-    result.push(5);
-  }
-
-  result.push(
-    6,7,8,9,10,11,12,13,14,15
-  );
-
-  return result;
+function logic(){
+ let s=selected();
+ document.querySelector('[data-s="3"]').style.display=s.includes("School")?"":"none";
+ document.querySelector('[data-s="4"]').style.display=s.includes("PUC")?"":"none";
+ document.querySelector('[data-s="5"]').style.display=s.includes("Degree")?"":"none";
+ document.getElementById("madrasa").classList.toggle("show",s.includes("School")&&s.includes("Madrasa"));
+ if(!visible().includes(current))current=2;
+ ui();
 }
 
-
-/* =========================================================
-   UPDATE UI
-========================================================= */
-
-function updateUI(){
-
-  const visible =
-    getVisibleSections();
-
-  if(!visible.includes(currentSection)){
-
-    const next =
-      visible.find(
-        number => number >= currentSection
-      );
-
-    currentSection =
-      next || 15;
-
-  }
-
-  sections.forEach(section => {
-
-    const number =
-      Number(section.dataset.section);
-
-    section.classList.toggle(
-      "active",
-      number === currentSection
-    );
-
-  });
-
-
-  const index =
-    visible.indexOf(currentSection);
-
-  const displayNumber =
-    index + 1;
-
-  const total =
-    visible.length;
-
-  const percentage =
-    Math.round(
-      displayNumber / total * 100
-    );
-
-
-  document.getElementById(
-    "progressText"
-  ).textContent =
-    `Section ${displayNumber} of ${total}`;
-
-  document.getElementById(
-    "progressPercent"
-  ).textContent =
-    `${percentage}%`;
-
-  document.getElementById(
-    "progressBar"
-  ).style.width =
-    `${percentage}%`;
-
-
-  document.getElementById(
-    "prevBtn"
-  ).disabled =
-    displayNumber === 1;
-
-
-  document.getElementById(
-    "nextBtn"
-  ).style.display =
-    currentSection === 15
-      ? "none"
-      : "inline-block";
-
-
-  document.getElementById(
-    "submitBtn"
-  ).style.display =
-    currentSection === 15
-      ? "inline-block"
-      : "none";
-
+function ui(){
+ let v=visible(),i=v.indexOf(current);
+ document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",+x.dataset.s===current));
+ document.getElementById("progressText").textContent=`Section ${i+1} of ${v.length}`;
+ document.getElementById("fill").style.width=((i+1)/v.length*100)+"%";
+ document.getElementById("back").disabled=i===0;
+ document.getElementById("next").style.display=current===15?"none":"inline-block";
+ document.getElementById("submit").style.display=current===15?"inline-block":"none";
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
-/* =========================================================
-   VALIDATION
-========================================================= */
-
-function validateCurrentSection(){
-
-  const active =
-    document.querySelector(
-      `.section[data-section="${currentSection}"]`
-    );
-
-  if(!active) return true;
-
-  const required =
-    active.querySelectorAll("[required]");
-
-  for(const input of required){
-
-    let valid = true;
-
-    if(input.type === "checkbox"){
-
-      valid = input.checked;
-
-    }else{
-
-      valid =
-        input.value.trim() !== "";
-
-    }
-
-    if(!valid){
-
-      input.classList.add("invalid");
-
-      input.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
-
-      showToast(
-        "Please complete the required field."
-      );
-
-      return false;
-    }
-
-    input.classList.remove("invalid");
-
-  }
-
-  return true;
-
+function validate(){
+ let sec=document.querySelector(`[data-s="${current}"]`);
+ for(let x of sec.querySelectorAll("[required]")){
+   if((x.type==="checkbox"&&!x.checked)||(!x.type==="checkbox"&&!x.value.trim())){
+     x.focus();alert("Please complete the required field.");return false;
+   }
+   if(x.type!=="checkbox"&&!x.value.trim()){
+     x.focus();alert("Please complete the required field.");return false;
+   }
+ }
+ return true;
 }
 
-
-/* =========================================================
-   NEXT
-========================================================= */
-
-function nextSection(){
-
-  if(!validateCurrentSection()){
-    return;
-  }
-
-  const visible =
-    getVisibleSections();
-
-  const index =
-    visible.indexOf(currentSection);
-
-  if(index < visible.length - 1){
-
-    currentSection =
-      visible[index + 1];
-
-    updateUI();
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  }
-
+function next(){
+ if(!validate())return;
+ let v=visible(),i=v.indexOf(current);
+ if(i<v.length-1){current=v[i+1];ui();}
 }
 
-
-/* =========================================================
-   BACK
-========================================================= */
-
-function previousSection(){
-
-  const visible =
-    getVisibleSections();
-
-  const index =
-    visible.indexOf(currentSection);
-
-  if(index > 0){
-
-    currentSection =
-      visible[index - 1];
-
-    updateUI();
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  }
-
+function back(){
+ let v=visible(),i=v.indexOf(current);
+ if(i>0){current=v[i-1];ui();}
 }
 
-
-/* =========================================================
-   DRAFT
-========================================================= */
-
-function getFormValues(){
-
-  const data = {};
-
-  [...form.elements].forEach(element => {
-
-    if(!element.name) return;
-
-    if(element.type === "checkbox"){
-
-      if(!data[element.name]){
-        data[element.name] = [];
-      }
-
-      if(element.checked){
-        data[element.name].push(
-          element.value
-        );
-      }
-
-    }else if(element.type === "radio"){
-
-      if(element.checked){
-
-        data[element.name] =
-          element.value;
-
-      }
-
-    }else if(element.type !== "file"){
-
-      data[element.name] =
-        element.value;
-
-    }
-
-  });
-
-  return data;
-
+function values(){
+ let d={};
+ [...form.elements].forEach(x=>{
+   if(!x.name)return;
+   if(x.type==="checkbox"){
+     if(!d[x.name])d[x.name]=[];
+     if(x.checked)d[x.name].push(x.value);
+   }else if(x.type==="radio"){
+     if(x.checked)d[x.name]=x.value;
+   }else if(x.type!=="file"){
+     d[x.name]=x.value.trim();
+   }
+ });
+ return d;
 }
 
-
-function saveDraft(){
-
-  const data =
-    getFormValues();
-
-  localStorage.setItem(
-    "VELORA_MISBAH_REQUIREMENT_DRAFT",
-    JSON.stringify(data)
-  );
-
-  showToast(
-    "Draft saved on this device."
-  );
-
+function draft(){
+ localStorage.setItem("MISBAH_DRAFT",JSON.stringify(values()));
+ alert("Draft saved on this device.");
 }
-
 
 function loadDraft(){
-
-  const saved =
-    localStorage.getItem(
-      "VELORA_MISBAH_REQUIREMENT_DRAFT"
-    );
-
-  if(!saved) return;
-
-  try{
-
-    const data =
-      JSON.parse(saved);
-
-    [...form.elements].forEach(element => {
-
-      if(!element.name) return;
-
-      if(data[element.name] === undefined){
-        return;
-      }
-
-      if(element.type === "checkbox"){
-
-        element.checked =
-          Array.isArray(
-            data[element.name]
-          ) &&
-          data[element.name]
-            .includes(element.value);
-
-      }else if(element.type === "radio"){
-
-        element.checked =
-          data[element.name] ===
-          element.value;
-
-      }else{
-
-        element.value =
-          data[element.name];
-
-      }
-
-    });
-
-    updateConditionalSections();
-
-  }catch(error){
-
-    console.error(
-      "Draft load failed:",
-      error
-    );
-
-  }
-
+ try{
+  let d=JSON.parse(localStorage.getItem("MISBAH_DRAFT")||"{}");
+  [...form.elements].forEach(x=>{
+   if(!x.name||d[x.name]===undefined)return;
+   if(x.type==="checkbox")x.checked=Array.isArray(d[x.name])&&d[x.name].includes(x.value);
+   else if(x.type!=="radio")x.value=d[x.name];
+  });
+ }catch(e){}
 }
 
-
-/* =========================================================
-   FILE NAMES
-========================================================= */
-
-function fileNames(name){
-
-  const input =
-    document.querySelector(
-      `input[name="${name}"]`
-    );
-
-  if(!input || !input.files.length){
-
-    return "No files uploaded";
-
-  }
-
-  return [
-    ...input.files
-  ].map(
-    file => file.name
-  ).join(", ");
-
+function esc(s){
+ return String(s??"")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;");
 }
 
-
-function showFiles(input,target){
-
-  const files =
-    [...input.files];
-
-  const output =
-    document.getElementById(target);
-
-  if(!files.length){
-
-    output.textContent =
-      "No files selected.";
-
-    return;
-
-  }
-
-  output.innerHTML =
-    files.map(
-      file =>
-      `✓ ${escapeHTML(file.name)}`
-    ).join("<br>");
-
+function section(title,rows){
+ return `
+ <div class="psec">
+ <h2>${esc(title)}</h2>
+ ${rows.map(r=>`
+ <div class="prow">
+ <b>${esc(r[0])}</b>
+ <div>${esc(r[1]||"Not provided").replaceAll("\n","<br>")}</div>
+ </div>`).join("")}
+ </div>`;
 }
 
+function makeDocument(){
+ const d=values(),id="VELORA-MGI-"+Date.now().toString().slice(-8);
+ let html=`<!doctype html><html><head><meta charset="utf-8"><title>${esc(id)}</title>
+ <style>
+ body{font-family:Arial;margin:0;color:#171717}
+ .top{background:#111;color:#fff;padding:22px}
+ .top h1{margin:0}.top p{color:#bbb}
+ main{padding:25px;max-width:850px;margin:auto}
+ .psec{page-break-inside:avoid;margin-bottom:25px}
+ .psec h2{color:#8f1830;border-bottom:2px solid #8f1830;padding-bottom:7px}
+ .prow{margin:10px 0;padding:8px 0;border-bottom:1px solid #eee}
+ .prow b{display:block;color:#666;font-size:12px;margin-bottom:3px}
+ .print{position:fixed;right:20px;bottom:20px;background:#8f1830;color:#fff;border:0;padding:14px 20px;border-radius:8px;font-weight:bold}
+ @media print{.print{display:none}}
+ </style></head><body>
+ <div class="top"><b>VELORA DIGITAL</b><h1>MISBAH GROUP OF INSTITUTIONS</h1>
+ <p>Website & Digital Platform Requirement Collection</p>
+ <p>Requirement ID: ${id}</p></div><main>`;
 
-document.querySelector(
-  'input[name="brand_files"]'
-).addEventListener(
-  "change",
-  function(){
-    showFiles(
-      this,
-      "brandFilesList"
-    );
+ html+=section("01 · Institution Identity",[
+ ["Institution / Group Name",d.institution_name],["Short Name",d.short_name],
+ ["Official Email",d.official_email],["Official Phone",d.official_phone],
+ ["Address",d.official_address],["City",d.city],["State",d.state],
+ ["Google Maps",d.maps_link],["Existing Website",d.existing_website]
+ ]);
+
+ html+=section("02 · Educational Sections",[
+ ["Selected Sections",d.sections?.join(", ")]
+ ]);
+
+ if(selected().includes("School")){
+  html+=section("03 · School Requirements",[
+   ["School Name",d.school_name],["School Contact",d.school_phone],
+   ["Classes",d.school_classes],["Board / Curriculum",d.school_board],
+   ["Timing",d.school_timing],["Facilities",d.school_facilities],
+   ["Activities",d.school_activities],["Other",d.school_other]
+  ]);
+  if(selected().includes("Madrasa")){
+   html+=section("MADRASA · INSIDE SCHOOL",[
+    ["Madrasa Name",d.madrasa_name],["Timing",d.madrasa_timing],
+    ["Classes / Levels",d.madrasa_classes],["Subjects",d.madrasa_subjects],
+    ["Activities",d.madrasa_activities],["Other",d.madrasa_other]
+   ]);
   }
-);
+ }
 
+ if(selected().includes("PUC"))html+=section("04 · PUC Requirements",[
+  ["PUC Name",d.puc_name],["Contact",d.puc_phone],["Streams",d.puc_streams],
+  ["Subjects",d.puc_subjects],["Facilities",d.puc_facilities],
+  ["Admission",d.puc_admission],["Other",d.puc_other]
+ ]);
 
-document.querySelector(
-  'input[name="pdf_sample"]'
-).addEventListener(
-  "change",
-  function(){
-    showFiles(
-      this,
-      "pdfFilesList"
-    );
-  }
-);
+ if(selected().includes("Degree"))html+=section("05 · Degree / Higher Education",[
+  ["Institution",d.degree_name],["Contact",d.degree_phone],
+  ["Courses",d.degree_courses],["Departments",d.degree_departments],
+  ["Eligibility",d.degree_eligibility],["Facilities",d.degree_facilities],
+  ["Other",d.degree_other]
+ ]);
 
+ html+=section("06 · Website Content",[
+ ["About",d.website_about],["Vision & Mission",d.vision_mission],
+ ["Management Message",d.management_message],["Programs",d.website_programs],
+ ["Campus & Facilities",d.campus_facilities],["Student Life",d.student_life],
+ ["News",d.news_requirements],["Other Pages",d.other_pages]
+ ]);
 
-/* =========================================================
-   REQUIREMENT ID
-========================================================= */
+ html+=section("07 · Photos, Videos & Media",[
+ ["Photos",d.photos_available],["Videos",d.videos_available],
+ ["Social Media",d.social_links],["Media Notes",d.media_notes],
+ ["Uploaded Files","Files selected on the submitting device"]
+ ]);
 
-function createRequirementID(){
+ html+=section("08 · Digital Admission Application",[
+ ["Student Details",d.admission_student_details],["Student Photo",d.student_photo],
+ ["Parent / Guardian",d.parent_details],["Academic Details",d.academic_details],
+ ["Documents",d.admission_documents],["Additional",d.admission_additional],
+ ["Declaration",d.admission_declaration],["Recipients",d.application_recipients],
+ ["Application Emails",d.application_emails],["WhatsApp",d.application_whatsapp],
+ ["Reference Number",d.reference_number],["Application Fee",d.application_fee],
+ ["Fee Process",d.fee_process]
+ ]);
 
-  const now =
-    new Date();
+ html+=section("09 · Application PDF Format",[
+ ["PDF Title",d.pdf_title],["Reference Number",d.pdf_reference],
+ ["Required Fields",d.pdf_fields],["Office Use",d.pdf_office_use],
+ ["Signature",d.pdf_signature]
+ ]);
 
-  const random =
-    Math.floor(
-      1000 +
-      Math.random() * 9000
-    );
+ html+=section("10 · Enquiry & Communication",[
+ ["General Enquiry",d.general_enquiry_process],["General Email",d.general_enquiry_email],
+ ["Admission Contact",d.admission_contact],["Admission Email",d.admission_email],
+ ["Response Process",d.response_method],["Recipients",d.enquiry_departments]
+ ]);
 
-  const date =
-    String(
-      now.getDate()
-    ).padStart(2,"0") +
+ html+=section("11 · Admin / Management",[
+ ["Admin Features",d.admin?.join(", ")],["Multiple Admin",d.multiple_admin],
+ ["Other",d.other_admin]
+ ]);
 
-    String(
-      now.getMonth()+1
-    ).padStart(2,"0") +
+ html+=section("12 · Domain, Hosting & Accounts",[
+ ["Domain Status",d.domain_status],["Preferred Domain",d.preferred_domain],
+ ["Hosting",d.hosting_status],["Official Accounts",d.official_accounts],
+ ["Other",d.account_requirements]
+ ]);
 
-    String(
-      now.getFullYear()
-    ).slice(-2);
+ html+=section("13 · Legal, Privacy & Approval",[
+ ["Privacy",d.privacy_requirements],["Terms",d.terms_requirements],
+ ["Student Data",d.student_data_policy],["Approval Person",d.approval_person],
+ ["Legal Notes",d.legal_notes]
+ ]);
 
-  return `VELORA-MGI-${date}-${random}`;
+ html+=section("14 · Special Requirements",[
+ ["Special Features",d.special_features],["Design Preferences",d.design_preferences],
+ ["Reference Websites",d.reference_websites],["Additional Requirements",d.additional_requirements]
+ ]);
 
+ html+=section("15 · Final Confirmation",[
+ ["Submitted By",d.submitted_by],["Designation",d.designation],
+ ["Submission Date",d.submission_date],["Requirement ID",id]
+ ]);
+
+ html+=`<hr><p><b>Prepared through Velora Digital requirement collection.</b></p>
+ </main><button class="print" onclick="window.print()">PRINT / SAVE AS PDF</button>
+ </body></html>`;
+
+ return {html,id};
 }
 
+form.addEventListener("submit",e=>{
+ e.preventDefault();
 
-/* =========================================================
-   PDF LIBRARY LOADER
-========================================================= */
+ if(!validate())return;
 
-function loadPDFLibrary(){
+ if(selected().length===0){
+  current=2;ui();
+  alert("Please select School, Madrasa, PUC or Degree.");
+  return;
+ }
 
-  return new Promise(
-    (resolve,reject) => {
+ const result=makeDocument();
 
-      if(
-        window.jspdf &&
-        window.jspdf.jsPDF
-      ){
+ localStorage.setItem("MISBAH_LAST_REQUIREMENT",JSON.stringify(values()));
+ localStorage.removeItem("MISBAH_DRAFT");
 
-        resolve(
-          window.jspdf.jsPDF
-        );
+ const w=window.open("","_blank");
 
-        return;
+ if(!w){
+  alert("Popup was blocked. Please allow pop-ups for this GitHub website and press Generate & Submit again.");
+  return;
+ }
 
-      }
+ w.document.open();
+ w.document.write(result.html);
+ w.document.close();
 
+ /* Open print dialog after document loads */
+ w.onload=()=>{
+  setTimeout(()=>w.print(),500);
+ };
 
-      const script =
-        document.createElement("script");
+ /* Also open WhatsApp/Gmail helpers on the original page */
+ setTimeout(()=>{
+  const message=`Hello Velora Digital,\n\nI have completed the Misbah Group of Institutions requirement form.\nRequirement ID: ${result.id}\n\nI will attach the generated PDF.\nThank you.`;
 
-      script.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
-
-      script.onload = () => {
-
-        if(
-          window.jspdf &&
-          window.jspdf.jsPDF
-        ){
-
-          resolve(
-            window.jspdf.jsPDF
-          );
-
-        }else{
-
-          reject(
-            new Error(
-              "PDF library loaded but jsPDF is unavailable."
-            )
-          );
-
-        }
-
-      };
-
-
-      script.onerror = () => {
-
-        reject(
-          new Error(
-            "Unable to load PDF library."
-          )
-        );
-
-      };
-
-
-      document.head.appendChild(
-        script
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   PDF TEXT HELPERS
-========================================================= */
-
-function safe(value){
-
-  if(
-    value === undefined ||
-    value === null ||
-    value === ""
-  ){
-
-    return "Not provided";
-
+  if(confirm("Requirement document opened successfully.\n\nPress OK to open WhatsApp, or Cancel to stay here.")){
+    window.open("https://wa.me/"+VELORA_WHATSAPP+"?text="+encodeURIComponent(message),"_blank");
   }
-
-  if(Array.isArray(value)){
-
-    return value.length
-      ? value.join(", ")
-      : "Not provided";
-
-  }
-
-  return String(value);
-
-}
-
-
-function addHeader(doc){
-
-  doc.setFillColor(
-    17,17,17
-  );
-
-  doc.rect(
-    0,0,210,18,"F"
-  );
-
-  doc.setTextColor(
-    255,255,255
-  );
-
-  doc.setFont(
-    "helvetica",
-    "bold"
-  );
-
-  doc.setFontSize(11);
-
-  doc.text(
-    "VELORA DIGITAL",
-    14,
-    11
-  );
-
-  doc.setFont(
-    "helvetica",
-    "normal"
-  );
-
-  doc.setFontSize(6.5);
-
-  doc.text(
-    "MISBAH GROUP OF INSTITUTIONS · REQUIREMENT COLLECTION",
-    196,
-    11,
-    {align:"right"}
-  );
-
-  doc.setTextColor(
-    20,20,20
-  );
-
-}
-
-
-function addFooter(doc,page,total){
-
-  doc.setFont(
-    "helvetica",
-    "normal"
-  );
-
-  doc.setFontSize(6.5);
-
-  doc.setTextColor(
-    125,125,125
-  );
-
-  doc.text(
-    `Velora Digital · Requirement ID: ${requirementID} · Page ${page} of ${total}`,
-    14,
-    290
-  );
-
-}
-
-
-function addWrapped(
-  doc,
-  text,
-  x,
-  y,
-  width,
-  lineHeight=5
-){
-
-  const normalized =
-    safe(text)
-      .replace(/[^\x00-\x7F]/g," ");
-
-  const lines =
-    doc.splitTextToSize(
-      normalized,
-      width
-    );
-
-  for(
-    let i=0;
-    i<lines.length;
-    i++
-  ){
-
-    if(y > 275){
-
-      doc.addPage();
-
-      addHeader(doc);
-
-      y = 27;
-
-    }
-
-    doc.text(
-      lines[i],
-      x,
-      y
-    );
-
-    y += lineHeight;
-
-  }
-
-  return y;
-
-}
-
-
-function addSectionPDF(
-  doc,
-  title,
-  fields,
-  y
-){
-
-  if(y > 260){
-
-    doc.addPage();
-
-    addHeader(doc);
-
-    y = 28;
-
-  }
-
-  doc.setFont(
-    "helvetica",
-    "bold"
-  );
-
-  doc.setFontSize(12);
-
-  doc.setTextColor(
-    143,24,48
-  );
-
-  doc.text(
-    title,
-    14,
-    y
-  );
-
-  y += 8;
-
-  fields.forEach(
-    field => {
-
-      if(y > 270){
-
-        doc.addPage();
-
-        addHeader(doc);
-
-        y = 28;
-
-      }
-
-      doc.setFont(
-        "helvetica",
-        "bold"
-      );
-
-      doc.setFontSize(7.5);
-
-      doc.setTextColor(
-        85,85,85
-      );
-
-      doc.text(
-        field[0],
-        14,
-        y
-      );
-
-      y += 4.5;
-
-      doc.setFont(
-        "helvetica",
-        "normal"
-      );
-
-      doc.setFontSize(8.5);
-
-      doc.setTextColor(
-        25,25,25
-      );
-
-      y =
-        addWrapped(
-          doc,
-          field[1],
-          14,
-          y,
-          180,
-          4.8
-        );
-
-      y += 4;
-
-    }
-  );
-
-  return y + 3;
-
-}
-
-
-/* =========================================================
-   CREATE PDF
-========================================================= */
-
-async function generatePDF(){
-
-  const jsPDF =
-    await loadPDFLibrary();
-
-  const data =
-    getFormValues();
-
-  const doc =
-    new jsPDF({
-      orientation:"portrait",
-      unit:"mm",
-      format:"a4"
-    });
-
-
-  requirementID =
-    createRequirementID();
-
-
-  /* FIRST PAGE */
-
-  addHeader(doc);
-
-  let y = 29;
-
-  doc.setFont(
-    "helvetica",
-    "bold"
-  );
-
-  doc.setFontSize(18);
-
-  doc.setTextColor(
-    143,24,48
-  );
-
-  doc.text(
-    "MISBAH GROUP OF INSTITUTIONS",
-    14,
-    y
-  );
-
-  y += 8;
-
-  doc.setFont(
-    "helvetica",
-    "normal"
-  );
-
-  doc.setFontSize(10);
-
-  doc.setTextColor(
-    40,40,40
-  );
-
-  doc.text(
-    "Website & Digital Platform Requirement Collection",
-    14,
-    y
-  );
-
-  y += 7;
-
-  doc.setFontSize(8);
-
-  doc.setTextColor(
-    100,100,100
-  );
-
-  doc.text(
-    `Requirement ID: ${requirementID}`,
-    14,
-    y
-  );
-
-  y += 5;
-
-  doc.text(
-    `Generated: ${new Date().toLocaleString("en-IN")}`,
-    14,
-    y
-  );
-
-  y += 10;
-
-
-  /* SECTION 1 */
-
-  y = addSectionPDF(
-    doc,
-    "01 · Institution Identity",
-    [
-      ["Institution / Group Name",data.institution_name],
-      ["Short Name",data.short_name],
-      ["Official Email",data.official_email],
-      ["Official Phone",data.official_phone],
-      ["Address",data.official_address],
-      ["City",data.city],
-      ["State",data.state],
-      ["Google Maps",data.maps_link],
-      ["Existing Website",data.existing_website]
-    ],
-    y
-  );
-
-
-  /* SECTION 2 */
-
-  y = addSectionPDF(
-    doc,
-    "02 · Educational Sections Selected",
-    [
-      ["Selected Sections",data.sections]
-    ],
-    y
-  );
-
-
-  /* SCHOOL */
-
-  if(
-    data.sections &&
-    data.sections.includes("School")
-  ){
-
-    y = addSectionPDF(
-      doc,
-      "03 · School Requirements",
-      [
-        ["School Name",data.school_name],
-        ["School Phone",data.school_phone],
-        ["Classes",data.school_classes],
-        ["Board / Curriculum",data.school_board],
-        ["School Timing",data.school_timing],
-        ["Facilities",data.school_facilities],
-        ["Activities",data.school_activities],
-        ["Other Requirements",data.school_other]
-      ],
-      y
-    );
-
-
-    if(
-      data.sections.includes("Madrasa")
-    ){
-
-      y = addSectionPDF(
-        doc,
-        "MADRASA · INSIDE SCHOOL",
-        [
-          ["Madrasa / Section Name",data.madrasa_name],
-          ["Madrasa Timing",data.madrasa_timing],
-          ["Classes / Levels",data.madrasa_classes],
-          ["Subjects",data.madrasa_subjects],
-          ["Activities",data.madrasa_activities],
-          ["Other Requirements",data.madrasa_other]
-        ],
-        y
-      );
-
-    }
-
-  }
-
-
-  /* PUC */
-
-  if(
-    data.sections &&
-    data.sections.includes("PUC")
-  ){
-
-    y = addSectionPDF(
-      doc,
-      "04 · PUC Requirements",
-      [
-        ["PUC Name",data.puc_name],
-        ["PUC Phone",data.puc_phone],
-        ["Streams",data.puc_streams],
-        ["Subjects",data.puc_subjects],
-        ["Facilities",data.puc_facilities],
-        ["Admission Information",data.puc_admission],
-        ["Other Requirements",data.puc_other]
-      ],
-      y
-    );
-
-  }
-
-
-  /* DEGREE */
-
-  if(
-    data.sections &&
-    data.sections.includes("Degree")
-  ){
-
-    y = addSectionPDF(
-      doc,
-      "05 · Degree / Higher Education",
-      [
-        ["Institution / College",data.degree_name],
-        ["Phone",data.degree_phone],
-        ["Courses",data.degree_courses],
-        ["Departments",data.degree_departments],
-        ["Eligibility",data.degree_eligibility],
-        ["Facilities",data.degree_facilities],
-        ["Other Requirements",data.degree_other]
-      ],
-      y
-    );
-
-  }
-
-
-  /* WEBSITE */
-
-  y = addSectionPDF(
-    doc,
-    "06 · Website Content",
-    [
-      ["About Institution",data.website_about],
-      ["Vision & Mission",data.vision_mission],
-      ["Management Message",data.management_message],
-      ["Programs / Courses",data.website_programs],
-      ["Campus & Facilities",data.campus_facilities],
-      ["Student Life",data.student_life],
-      ["News / Announcements",data.news_requirements],
-      ["Other Pages",data.other_pages]
-    ],
-    y
-  );
-
-
-  /* MEDIA */
-
-  y = addSectionPDF(
-    doc,
-    "07 · Photos, Videos & Media",
-    [
-      ["Photos Available",data.photos_available],
-      ["Videos Available",data.videos_available],
-      ["Social Media",data.social_links],
-      ["Uploaded Brand Files",fileNames("brand_files")],
-      ["Media Notes",data.media_notes]
-    ],
-    y
-  );
-
-
-  /* ADMISSION */
-
-  y = addSectionPDF(
-    doc,
-    "08 · Digital Admission Application",
-    [
-      ["Student Details",data.admission_student_details],
-      ["Student Photo",data.student_photo],
-      ["Parent / Guardian Details",data.parent_details],
-      ["Academic Details",data.academic_details],
-      ["Documents",data.admission_documents],
-      ["Additional Details",data.admission_additional],
-      ["Declaration",data.admission_declaration],
-      ["Application Recipients",data.application_recipients],
-      ["Application Email(s)",data.application_emails],
-      ["Application WhatsApp",data.application_whatsapp],
-      ["Generate Reference Number",data.reference_number],
-      ["Application Fee",data.application_fee],
-      ["Fee Process",data.fee_process]
-    ],
-    y
-  );
-
-
-  /* PDF FORMAT */
-
-  y = addSectionPDF(
-    doc,
-    "09 · Application PDF Format",
-    [
-      ["PDF Title",data.pdf_title],
-      ["Reference Number on PDF",data.pdf_reference],
-      ["Required PDF Fields",data.pdf_fields],
-      ["Office Use",data.pdf_office_use],
-      ["Signature / Declaration",data.pdf_signature],
-      ["Uploaded PDF Samples",fileNames("pdf_sample")]
-    ],
-    y
-  );
-
-
-  /* ENQUIRY */
-
-  y = addSectionPDF(
-    doc,
-    "10 · Enquiry & Communication",
-    [
-      ["General Enquiry Process",data.general_enquiry_process],
-      ["General Enquiry Email",data.general_enquiry_email],
-      ["Admission Contact",data.admission_contact],
-      ["Admission Office Email",data.admission_email],
-      ["Response Method",data.response_method],
-      ["Departments / Recipients",data.enquiry_departments]
-    ],
-    y
-  );
-
-
-  /* ADMIN */
-
-  y = addSectionPDF(
-    doc,
-    "11 · Admin & Management",
-    [
-      ["Admin Features",data.admin_features],
-      ["Multiple Admin Accounts",data.multiple_admin],
-      ["Other Admin Requirements",data.other_admin]
-    ],
-    y
-  );
-
-
-  /* DOMAIN */
-
-  y = addSectionPDF(
-    doc,
-    "12 · Domain, Hosting & Accounts",
-    [
-      ["Domain Status",data.domain_status],
-      ["Preferred Domain",data.preferred_domain],
-      ["Hosting Status",data.hosting_status],
-      ["Official Accounts",data.official_accounts],
-      ["Account Requirements",data.account_requirements]
-    ],
-    y
-  );
-
-
-  /* LEGAL */
-
-  y = addSectionPDF(
-    doc,
-    "13 · Legal, Privacy & Approval",
-    [
-      ["Privacy Requirements",data.privacy_requirements],
-      ["Terms / Disclaimer",data.terms_requirements],
-      ["Student Data Policy",data.student_data_policy],
-      ["Approval Person",data.approval_person],
-      ["Legal Notes",data.legal_notes]
-    ],
-    y
-  );
-
-
-  /* SPECIAL */
-
-  y = addSectionPDF(
-    doc,
-    "14 · Special Requirements",
-    [
-      ["Special Features",data.special_features],
-      ["Design Preferences",data.design_preferences],
-      ["Reference Websites",data.reference_websites],
-      ["Additional Requirements",data.additional_requirements]
-    ],
-    y
-  );
-
-
-  /* FINAL */
-
-  y = addSectionPDF(
-    doc,
-    "15 · Final Confirmation",
-    [
-      ["Submitted By",data.submitted_by],
-      ["Designation",data.submitter_designation],
-      ["Submission Date",data.submission_date],
-      ["Confirmation","Information confirmed by the person submitting this requirement form."]
-    ],
-    y
-  );
-
-
-  /* FOOTERS */
-
-  const total =
-    doc.getNumberOfPages();
-
-  for(
-    let page=1;
-    page<=total;
-    page++
-  ){
-
-    doc.setPage(page);
-
-    addFooter(
-      doc,
-      page,
-      total
-    );
-
-  }
-
-
-  generatedPDFBlob =
-    doc.output("blob");
-
-
-  generatedPDFFile =
-    new File(
-      [generatedPDFBlob],
-      `${requirementID}_Requirement.pdf`,
-      {
-        type:"application/pdf"
-      }
-    );
-
-
-  generatedPDFName =
-    generatedPDFFile.name;
-
-
-  return generatedPDFFile;
-
-}
-
-
-/* =========================================================
-   DOWNLOAD
-========================================================= */
-
-function downloadBlob(
-  blob,
-  filename
-){
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const link =
-    document.createElement("a");
-
-  link.href = url;
-
-  link.download = filename;
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
-
-  setTimeout(
-    () => URL.revokeObjectURL(url),
-    3000
-  );
-
-}
-
-
-function downloadAgain(){
-
-  if(!generatedPDFBlob){
-
-    showToast(
-      "PDF is not available yet."
-    );
-
-    return;
-
-  }
-
-  downloadBlob(
-    generatedPDFBlob,
-    generatedPDFName
-  );
-
-  showToast(
-    "PDF downloaded again."
-  );
-
-}
-
-
-/* =========================================================
-   SUBMIT
-========================================================= */
-
-form.addEventListener(
-  "submit",
-  async function(event){
-
-    event.preventDefault();
-
-
-    if(!validateCurrentSection()){
-
-      return;
-
-    }
-
-
-    if(
-      getSelectedSections().length === 0
-    ){
-
-      currentSection = 2;
-
-      updateUI();
-
-      showToast(
-        "Please select at least one educational section."
-      );
-
-      return;
-
-    }
-
-
-    const submitButton =
-      document.getElementById(
-        "submitBtn"
-      );
-
-    submitButton.disabled = true;
-
-    submitButton.textContent =
-      "Generating...";
-
-
-    document.getElementById(
-      "loading"
-    ).classList.add("show");
-
-
-    document.getElementById(
-      "loadingText"
-    ).textContent =
-      "Preparing your requirement PDF...";
-
-
-    try{
-
-      const file =
-        await generatePDF();
-
-
-      document.getElementById(
-        "loadingText"
-      ).textContent =
-        "Finalising document...";
-
-
-      /*
-        DOWNLOAD FIRST.
-        This guarantees the PDF is saved even if
-        browser sharing is unavailable.
-      */
-
-      downloadBlob(
-        generatedPDFBlob,
-        generatedPDFName
-      );
-
-
-      /*
-        Save a lightweight submission record
-        locally for this browser.
-      */
-
-      const submission =
-        getFormValues();
-
-      submission.requirement_id =
-        requirementID;
-
-      submission.generated_at =
-        new Date().toISOString();
-
-      localStorage.setItem(
-        "VELORA_LAST_SUBMISSION",
-        JSON.stringify(
-          submission
-        )
-      );
-
-
-      localStorage.removeItem(
-        "VELORA_MISBAH_REQUIREMENT_DRAFT"
-      );
-
-
-      document.getElementById(
-        "loading"
-      ).classList.remove("show");
-
-
-      document.getElementById(
-        "requirementForm"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "successScreen"
-      ).classList.add("show");
-
-
-      document.getElementById(
-        "referenceDisplay"
-      ).textContent =
-        requirementID;
-
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
-
-
-      /*
-        DO NOT automatically open WhatsApp.
-        Show the user the proper share buttons.
-      */
-
-      showToast(
-        "PDF generated and downloaded successfully."
-      );
-
-
-    }catch(error){
-
-      console.error(
-        "SUBMISSION ERROR:",
-        error
-      );
-
-
-      document.getElementById(
-        "loading"
-      ).classList.remove("show");
-
-
-      /*
-        VERY IMPORTANT:
-        Don't silently fail.
-      */
-
-      alert(
-        "The PDF could not be generated.\n\n" +
-        "Please check your internet connection and try again.\n\n" +
-        "Technical message: " +
-        error.message
-      );
-
-
-    }finally{
-
-      submitButton.disabled = false;
-
-      submitButton.textContent =
-        "Generate & Submit";
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   SHARE PDF
-========================================================= */
-
-async function sharePDF(){
-
-  if(!generatedPDFFile){
-
-    showToast(
-      "PDF is not available."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    if(
-      navigator.share &&
-      navigator.canShare &&
-      navigator.canShare({
-        files:[
-          generatedPDFFile
-        ]
-      })
-    ){
-
-      await navigator.share({
-
-        title:
-          "Misbah Group Requirement",
-
-        text:
-          `Misbah Group of Institutions Requirement · ${requirementID}`,
-
-        files:[
-          generatedPDFFile
-        ]
-
-      });
-
-      return;
-
-    }
-
-
-    /*
-      Desktop / unsupported browser:
-      simply download again.
-    */
-
-    downloadAgain();
-
-    showToast(
-      "PDF downloaded. Attach it manually in WhatsApp or Gmail."
-    );
-
-
-  }catch(error){
-
-    console.log(
-      "Share cancelled:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function openWhatsApp(){
-
-  if(
-    VELORA_WHATSAPP ===
-    "YOUR_VELORA_WHATSAPP_NUMBER"
-  ){
-
-    alert(
-      "Add your official Velora WhatsApp number at the top of the HTML file first."
-    );
-
-    return;
-
-  }
-
-
-  const message =
-`Hello Velora Digital,
-
-I have completed the Misbah Group of Institutions requirement form.
-
-Requirement ID: ${requirementID}
-
-I am sending the generated requirement PDF.
-
-Thank you.`;
-
-
-  const url =
-    `https://wa.me/${VELORA_WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
-  window.open(
-    url,
-    "_blank"
-  );
-
-
-  showToast(
-    "WhatsApp opened. Please attach the downloaded PDF."
-  );
-
-}
-
-
-/* =========================================================
-   EMAIL
-========================================================= */
-
-function openEmail(){
-
-  if(
-    VELORA_EMAIL ===
-    "YOUR_VELORA_EMAIL"
-  ){
-
-    alert(
-      "Add your official Velora email at the top of the HTML file first."
-    );
-
-    return;
-
-  }
-
-
-  const data =
-    getFormValues();
-
-
-  const subject =
-    `Misbah Group Requirement · ${requirementID}`;
-
-
-  const body =
-`Hello Velora Digital,
-
-I have completed the Misbah Group of Institutions requirement form.
-
-Requirement ID: ${requirementID}
-
-Institution:
-${safe(data.institution_name)}
-
-Submitted By:
-${safe(data.submitted_by)}
-
-Designation:
-${safe(data.submitter_designation)}
-
-The requirement PDF has been generated.
-
-Please find the PDF attached to this email.
-
-Thank you.`;
-
-
-  const mailto =
-    `mailto:${VELORA_EMAIL}` +
-    `?subject=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`;
-
-
-  window.location.href =
-    mailto;
-
-
-  showToast(
-    "Email app opened. Please attach the downloaded PDF."
-  );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-  toast.textContent =
-    message;
-
-  toast.classList.add(
-    "show"
-  );
-
-  setTimeout(
-    () => {
-      toast.classList.remove(
-        "show"
-      );
-    },
-    3500
-  );
-
-}
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
-
-
-/* =========================================================
-   REMOVE ERROR STYLE WHEN USER TYPES
-========================================================= */
-
-document.addEventListener(
-  "input",
-  function(event){
-
-    if(
-      event.target.classList.contains(
-        "invalid"
-      )
-    ){
-
-      event.target.classList.remove(
-        "invalid"
-      );
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   INITIALISE
-========================================================= */
+ },800);
+});
 
 loadDraft();
-
-updateConditionalSections();
-
+logic();
 </script>
-
 </body>
 </html>
